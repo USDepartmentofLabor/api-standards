@@ -1,29 +1,20 @@
-# 18F API Standards
+# DOL API Standards
 
-**[18F](https://18f.gsa.gov/)** is a technology team inside the US federal government. 18F is very API-focused: our first project was an [API for business opportunities](https://fbopen.gsa.gov/).
-
-This document captures **18F's view of API best practices and standards**. We aim to incorporate as many of them as possible into our work.
-
-APIs, like other web applications, vary greatly in implementation and design, depending on the situation and the problem the application is solving.
-
-This document provides a mix of:
-
-* **High level design guidance** that individual APIs interpret to meet their needs.
-* **Low level web practices** that most modern HTTP APIs use.
+This document captures **DOL's view of API best practices and standards** as can be applied to the DOL-wide API. We will incorporate these into our work.
 
 ### Design for common use cases
 
-For APIs that syndicate data, consider several common client use cases:
+DOL's API is designed with varying uses in mind:
 
 * **Bulk data.** Clients often wish to establish their own copy of the API's dataset in its entirety. For example, someone might like to build their own search engine on top of the dataset, using different parameters and technology than the "official" API allows. If the API can't easily act as a bulk data provider, provide a separate mechanism for acquiring the backing dataset in bulk.
 * **Staying up to date.** Especially for large datasets, clients may want to keep their dataset up to date without downloading the data set after every change. If this is a use case for the API, prioritize it in the design.
 * **Driving expensive actions.** What would happen if a client wanted to automatically send text messages to thousands of people or light up the side of a skyscraper every time a new record appears? Consider whether the API's records will always be in a reliable unchanging order, and whether they tend to appear in clumps or in a steady stream. Generally speaking, consider the "entropy" an API client would experience.\
 
-### Using one's own API
+### Using one's own API (dogfooding)
 
 The #1 best way to understand and address the weaknesses in an API's design and implementation is to use it in a production system.
 
-Whenever feasible, design an API in parallel with an accompanying integration of that API.
+Whenever feasible, design applications to integrate with the API.
 
 ### Point of contact
 

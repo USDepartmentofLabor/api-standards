@@ -54,11 +54,11 @@ Some examples of these principles in action:
 * [OpenFDA example query](http://open.fda.gov/api/reference/#example-query)
 * [Sunlight Congress API methods](https://sunlightlabs.github.io/congress/#using-the-api)
 
-### Just use JSON
+### JSON As the Default
 
 [JSON](https://en.wikipedia.org/wiki/JSON) is an excellent, widely supported transport format, suitable for many web APIs.
 
-Supporting JSON and only JSON is a practical default for APIs, and generally reduces complexity for both the API provider and consumer.
+Supporting JSON as the default will support developers' needs in this day and age.  XML and CSV will be optional formats for those with legacy code or who want bulk downloads.
 
 General JSON guidelines:
 
@@ -77,13 +77,10 @@ This date format is used all over the web, and puts each field in consistent ord
 
 ### API Keys
 
-These standards do not take a position on whether or not to use API keys.
+These standards do take a position on whether or not to use API keys.  DOL uses them to provide detailed metrics to the API management team and senior leadership as well as to the developers themselves.  API keys will be required and will be sent through the header.
 
-But _if_ keys are used to manage and authenticate API access, the API should allow some sort of unauthenticated access, without keys.
+In the future, the API **may** allow some sort of very limited unauthenticated access, without keys to allow newcomers to use and experiment with the API in demo environments and with simple `curl`/`wget`/etc. requests.
 
-This allows newcomers to use and experiment with the API in demo environments and with simple `curl`/`wget`/etc. requests.
-
-Consider whether one of your product goals is to allow a certain level of normal production use of the API without enforcing advanced registration by clients.
 
 
 ### Error handling
@@ -98,13 +95,17 @@ For example, a JSON API might provide the following when an uncaught exception o
   "exception": "[detailed stacktrace]"
 }
 ```
+HTTP error responses should conform to the HTTP spec.
 
 HTTP responses with error details should use a `4XX` status code to indicate a client-side failure (such as invalid authorization, or an invalid parameter), and a `5XX` status code to indicate server-side failure (such as an uncaught exception).
 
+### Transaction Logging
+
+All API requests will be logged to provide the API management team and individual developers detailed metrics.  **Nothing that can identify a user of an app that consumes the API will be logged.**
 
 ### Pagination
 
-If pagination is required to navigate datasets, use the method that makes the most sense for the API's data.
+DOL will follow a "no pagination first" policy.  If pagination is required by the user to navigate datasets or it's necessary due to technical contstraints on the part of a data source, use the method that makes the most sense for the API's data.
 
 #### Parameters
 
@@ -133,7 +134,7 @@ Example of how that might be implemented:
 
 ### Always use HTTPS
 
-Any new API should use and require [HTTPS encryption](https://en.wikipedia.org/wiki/HTTP_Secure) (using TLS/SSL). HTTPS provides:
+Any new API should use and require [HTTPS encryption](https://en.wikipedia.org/wiki/HTTP_Secure) (using TLS/SSL) with 2048 bit encryption at a minimum. HTTPS provides:
 
 * **Security**. The contents of the request are encrypted across the Internet.
 * **Authenticity**. A stronger guarantee that a client is communicating with the real API.

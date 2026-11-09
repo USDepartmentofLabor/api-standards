@@ -1,3 +1,6 @@
+>[!WARNING]
+>This repository has been archived and is no longer maintained. The code is provided for historical reference and may contain unpatched or unknown vulnerabilities. It should ***not*** be used in production systems.
+
 # DOL API Standards
 
 This document captures **DOL's view of API best practices and standards** as can be applied to the DOL-wide API. We will incorporate these into our work.
